@@ -1,0 +1,28 @@
+---
+title: Basic knowledge
+description: Basic knowledge.
+imageTitle: Basic knowledge
+path: /docs/basic-knowledge
+---
+
+import { Bleed } from "nextra-theme-docs";
+import { Callout } from "nextra/components";
+
+<Bleed>![](/bannerblockchain.png)</Bleed>
+
+# What is Blockchain
+
+<Callout type="info" emoji="">
+  Blockchain is a distributed ledger technology that allows data to be stored across a network of computers in a way that's transparent, secure, and without a central authority. At its core, a blockchain is a chain of blocks, with each block containing a list of records called transactions.
+
+Every computer in the network must agree upon each new block and the chain as a whole. These computers are known as "nodes". Nodes ensure everyone interacting with the blockchain has the same data. To accomplish this distributed agreement, blockchains need a consensus mechanism.
+
+</Callout>
+
+## Ethereum Virtual Machine (EVM)
+
+The Ethereum Virtual Machine is the global virtual computer whose state every participant on the Ethereum network stores and agrees on. Any participant can request the execution of arbitrary code on the EVM; code execution changes the state of the EVM.
+
+## Nodes
+
+The real-life machines which are storing the EVM state. Nodes communicate with each other to propagate information about the EVM state and new state changes. Any user can also request the execution of code by broadcasting a code execution request from a node. The Ethereum network itself is the aggregate of all Ethereum nodes and their communications.

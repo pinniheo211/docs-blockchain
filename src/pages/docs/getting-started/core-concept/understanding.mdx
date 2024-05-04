@@ -1,0 +1,50 @@
+---
+title: Understanding pbft
+description: Understanding pbft.
+imageTitle: Understanding pbft
+path: /docs/getting-started/core-concept/understanding
+---
+
+# Understanding pBFT
+
+### Understanding the Practical Byzantine Fault Tolerance (pBFT) algorithm requires a grasp of the fundamental concepts and mechanisms that underlie this consensus protocol. pBFT is a Byzantine fault-tolerant algorithm designed for use in distributed systems, particularly in the context of blockchain technology. Here's a comprehensive explanation of the pBFT algorithm:
+
+1. **Byzantine Fault Tolerance (BFT):**
+
+pBFT falls under the broader category of Byzantine fault-tolerant algorithms, which aim to achieve consensus in distributed systems even in the presence of malicious nodes or Byzantine failures. Byzantine failures refer to nodes that may behave arbitrarily, including sending incorrect or conflicting information to disrupt the system. 2. Key Principles of pBFT:
+
+Replica Nodes: In a pBFT network, there are typically multiple replica nodes responsible for validating and ordering transactions. Client-Server Model: The consensus process in pBFT follows a client-server model, where client nodes send transaction proposals to a set of replica nodes. 3. Phases of the pBFT Algorithm:
+
+### pBFT operates in several phases to reach consensus:
+
+![pbft consensus reaching process](/assets/images/docs/getting-started/core-concept/pbft-consensus.webp)
+
+    a. **Request:** A client initiates the consensus process by sending a transaction proposal to the network.
+
+Replica nodes receive pre-prepare messages and verify the following:
+    <ol className="ml-10">
+        <li>a.  the legitimacy of the signature of m and whether d is compatible with m: d=hash(m)</li>
+        <li>b.  if the node is currently in v</li>
+        <li>c.  The node does not have other pre-prepare messages on the same page (view v ，sequence n). Namely, there isn’t another m’ and d’, where d’=hash(m’)</li>
+        {/* <li>d\. h <= n <\= H, H and h represent the high and low thresholds of n</li> */}
+    </ol>
+
+    b. **Pre-Prepare:** In this phase, the primary replica node receives the client's request and assigns it a unique sequence number. The primary then broadcasts this request, along with its sequence number, to the other replicas.
+
+    c. **Prepare:** Upon receiving the Pre-Prepare message, the non-primary replicas verify the request, check the primary's sequence number, and if everything is correct, they send Prepare messages to the rest of the network.
+
+    d. **Commit:** Once a replica has received a sufficient number of Prepare messages (usually a two-thirds majority), it sends a Commit message to indicate its agreement on the transaction's validity.
+
+    e. **Response:** After receiving Commit messages from a two-thirds majority of replicas, the client knows that the transaction is confirmed and sends a Response message to the network.
+
+    f. **Execute:** Finally, each replica executes the accepted transaction and updates its local state.
+
+    2. **Fault Tolerance and Security:**
+
+pBFT is designed to tolerate up to (n-1)/3 Byzantine faulty nodes, where 'n' is the total number of nodes. It achieves security through redundancy, as a malicious node would need to compromise a significant portion of the network to subvert consensus. 5. Performance Considerations:
+
+pBFT is known for its low latency and high throughput compared to traditional consensus algorithms like Proof of Work (PoW). However, it is typically used in permissioned or consortium blockchains due to its reliance on a fixed set of validating nodes. 6. Limitations:
+
+pBFT's primary limitation is its scalability, as the number of validating nodes can be limited compared to more open consensus algorithms like PoW and PoS. It assumes that the majority of nodes are honest and that network conditions are reasonably reliable. 7. Use Cases:
+
+pBFT is well-suited for private and permissioned blockchain networks where the validating nodes are known and trusted, such as in enterprise settings. In conclusion, the pBFT algorithm is a robust Byzantine fault-tolerant consensus protocol that ensures agreement among distributed nodes in a network, even in the presence of malicious actors. Its key principles, phases, and fault tolerance mechanisms make it a valuable choice for blockchain networks that prioritize low latency, security, and a known set of validating nodes. Understanding pBFT is essential for those interested in designing or working with blockchain systems that require strong consensus guarantees.

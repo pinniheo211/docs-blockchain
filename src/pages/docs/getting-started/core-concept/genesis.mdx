@@ -1,0 +1,55 @@
+---
+title: Genesis File
+description: Genesis File.
+imageTitle: Genesis File
+path: /docs/getting-started/core-concept/genesis
+---
+
+# Genesis File
+
+The genesis file is a JSON-formatted document that establishes the primary state of a blockchain. It serves as the foundational block, positioned at height 0, of the blockchain structure. The subsequent block, at height 1, recognizes the genesis file as its predecessor.
+
+The genesis file encapsulates various critical data points such as the initial token distribution, genesis timestamp, default configurations, and more. Here's a detailed breakdown:
+
+## Key Components
+
+1. **chainid:**
+    - 2014 To ensure compatibility with third-party services familiar with Ethereum, it's advisable not to employ a network ID previously utilized in the Ethereum ecosystem. 
+
+2. **period:**
+    - Represents the minimum time interval between the timestamps of two consecutive blocks. Recommended setting is 5 seconds for testnet.
+
+3. **epoch:**
+    - Denotes the block count after which there's a checkpoint, followed by a reset of pending votes. Suggested value is 100 for the testnet.
+
+4. **nonce:**
+    - In the NOW Blockchain, the nonce represents a secure proof-of-work for mining, ensuring the computational effort made to ascertain this token value. Consistently set to 0x0 in the NOW chain.
+
+5. **timestamp:**
+    - Should always surpass the parent timestamp by at least one BLOCK_PERIOD.
+
+6. **extraData:**
+    - EXTRA_VANITY: Preserves a fixed count of prefix bytes in extra-data for signer vanity. Typically, 32 bytes are suggested.
+    - Signer Info: Denotes the validator address.
+    - EXTRA_SEAL bytes: Fixed in number; this is the signature of the signer that seals the header.
+
+7. **gasLimit:**
+    - Represents the collective Gas limit for every block. Set high to prevent limitations during testing, although Gas consumption by Contracts remains a consideration. For the testnet, the GasCeil is set to 80000000
+
+8. **difficulty:**
+    - Reflects the challenge encountered during nonce discovery for this block. Testnet recommendation is 0x1.
+
+9. **mixHash:**
+    - Reserved for potential fork safeguards, akin to the DAO's extra-data. During standard operations, this should be populated with zeros.
+
+10. **coinbase:**
+    - A system-managed address designated for accumulating block rewards.
+
+11. **number:**
+    - Indicates the block's height in the chain, with the genesis positioned at block 0.
+
+12. **parentHash:**
+    - A 256-bit Keccak hash of the complete header of the preceding block (inclusive of its nonce and mixhash). This acts as a link to the parent block, facilitating the creation of the block chain. Exclusively for the Genesis block, it is set to 0.
+
+By understanding the structure and purpose of each component within the genesis file, participants can gain insight into the foundational principles governing the NOW Blockchain.
+
